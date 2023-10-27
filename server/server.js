@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
+// import { MongoClient } from 'mongodb'; // Import MongoClient from mongodb package
 import pkg from 'mongodb';
 const { MongoClient } = pkg;
 
@@ -35,38 +36,31 @@ client.connect().then(() => {
     console.error('Error connecting to MongoDB:', error);
 });
 
-// Generate a unique collection name using a timestamp
-const getUniqueCollectionName = () => {
-    const timestamp = Date.now();
-    return `ChatHistory_${timestamp}`;
-};
-
 app.get('/', async (req, res) => {
     res.status(200).send({
         message: 'Hello from InfoGeniusAI'
     });
 });
 
-app.post('/start-chat', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
-        const userName = req.body.name;
+        const userMessage = req.body.prompt;
 
-        // Generate a collection name based on the user's name
-        const collectionName = userName.replace(/\s/g, '_'); // Replace spaces with underscores
+        // Add user message to conversation history
+        conversationHistory.push({ role: 'user', message: userMessage });
 
-        // Store chat data in a new MongoDB collection
-        const database = client.db('ChatDB');
-        const collection = database.collection(collectionName);
+        // Generate custom response based on conversation history
+        const customResponse = generateCustomResponse(userMessage);
 
-        // // Store chat data in a new MongoDB collection
-        // const database = client.db('ChatDB');
-        // const collection = database.collection(collectionName);
-
+        // Store chat data in MongoDB
         const chatData = {
             user: userMessage,
-            bot: customResponse || "",
+            bot: customResponse || "", // If customResponse is null, set bot response to an empty string
             timestamp: new Date(),
         };
+
+        const database = client.db('ChatDB'); // Replace 'ChatDB' with your actual database name
+        const collection = database.collection('ChatHistory');
 
         await collection.insertOne(chatData);
 
