@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/svg+xml"
+        href="https://cdn.discordapp.com/attachments/831182495813730324/1130168122557612122/AI_logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfoGenius AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="chat_container" style="margin-bottom: 10px;"></div>
+
+        <form style="margin-bottom: 6px;">
+            <textarea id = "prompt" name="prompt" rows="1" cols="1" placeholder="Type any message..."></textarea>
+            <button type="submit"><img src="assets/send.svg" /></button>
+        </form>
+
+        <!-- Add some space between the instruction message and the bottom of the screen -->
+        <div style="margin-bottom: 6px;">
+            <!-- Center-align the instruction message on mobile devices and apply a small font -->
+            <span
+                style="color:#FFFFFF; margin: 0 auto; display: block; text-align: center; font-family: 'Arial', sans-serif; font-size: 12.9px;">
+                The InfoGenius AI is being developed; hence, it may not produce all outputs correctly. It is recommended
+                to run the
+                InfoGenius AI on a PC.
+            </span>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
