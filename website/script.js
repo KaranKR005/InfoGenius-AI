@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const usernameForm = document.getElementById("username-form");
-    const usernameInput = document.getElementById("username");
 
-    usernameForm.addEventListener("submit", async function(event) {
+    usernameForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
+        const usernameInput = document.getElementById("username");
         const username = usernameInput.value.trim();
+
         if (username === "") {
             alert("Please enter your username.");
         } else {
