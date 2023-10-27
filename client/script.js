@@ -105,7 +105,7 @@ const handleSubmit = async (e) => {
     loader(messageDiv);
 
     try {
-        const response = await fetch('http://localhost:5000', {  //https://infogenius-ai.onrender.com       http://localhost:5000
+        const response = await fetch('https://infogenius-ai.onrender.com', {  //https://infogenius-ai.onrender.com  https://infogenius-ai.onrender.com     http://localhost:5000
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
