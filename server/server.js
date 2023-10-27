@@ -29,12 +29,15 @@ client.connect().then(() => {
 
 app.get('/chat', (req, res) => {
     const username = req.query.username;
-    if (!username) {
+    if (username) {
         res.status(400).send("Username is required.");
         return;
-    }
 
-    res.status(200).sendFile(__dirname + '/chat.html');
+        res.sendFile(__dirname + '/chat.html');
+    } else {
+        // Handle the case where the username is not provided
+        res.status(400).send('Username not provided.');
+    }
 });
 
 app.post('/start-chat', async (req, res) => {
