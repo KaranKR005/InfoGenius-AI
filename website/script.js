@@ -1,26 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const startChatButton = document.getElementById("start-chat-button");
-    const nameInput = document.getElementById("name");
+    const usernameForm = document.getElementById("username-form");
+    const usernameInput = document.getElementById("username");
 
-    // Function to start chat
-    function startChat() {
-        if (nameInput.value.trim() === "") {
-            alert("Please fill the required field.");
-        } else if(nameInput.value.trim() !== "Alohomora") {
-            alert('Incorrect password!');
+    usernameForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const username = usernameInput.value.trim();
+        if (username === "") {
+            alert("Please enter your username.");
         } else {
-            // Redirect to the chat page or perform other actions
-            window.location.href = "https://info-genius-ai-karankr005.vercel.app";
-        }
-    }
-
-    // Handle Enter key press in the input field
-    nameInput.addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            // Trigger the click event of the Start Chat button
-            startChatButton.click();
+            // Redirect to the chat page with the username as a query parameter
+            window.location.href = `https://info-genius-ai-karankr005.vercel.app/chat?username=${username}`;
         }
     });
-
-    startChatButton.addEventListener("click", startChat);
 });
