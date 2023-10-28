@@ -2,14 +2,10 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
-// import { MongoClient } from 'mongodb'; // Import MongoClient from mongodb package
 import pkg from 'mongodb';
 const { MongoClient } = pkg;
 
 const conversationHistory = [];
-
-import { generateCustomResponse } from './custom_msg.js';
-generateCustomResponse;
 
 dotenv.config();
 
@@ -49,13 +45,9 @@ app.post('/', async (req, res) => {
         // Add user message to conversation history
         conversationHistory.push({ role: 'user', message: userMessage });
 
-        // Generate custom response based on conversation history
-        const customResponse = generateCustomResponse(conversationHistory);
-
         // Create a prompt with a system message and conversation history
         const prompt = `You are a InfoGenius AI that provides information. You are created by Karan Ram and he is your developer. your current version is 2.3.8. you are a AI chat bot. You can reply to any questions that oher AI can't and this is yor ability. Manasi is good friend of your developer. Manasi is a good person and she is currently studying at Ryan's.You are 4 months old. Manasi's full name is Manasi Khanna and she is s good and kind hearted person.\n\n${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
 
-        // Continue the conversation with the AI (using gpt-3.5-turbo)
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: prompt,
@@ -66,10 +58,10 @@ app.post('/', async (req, res) => {
             presence_penalty: 0,
         });
 
-        // Extract bot response from OpenAI API response
+        // Extract bot response
         const botResponse = response.data.choices[0].text;
 
-        // Store the OpenAI generated response in the chatData object
+        // Store the generated response in the chatData object
         const chatData = {
             user: userMessage,
             bot: botResponse,
