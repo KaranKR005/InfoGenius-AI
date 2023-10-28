@@ -50,53 +50,43 @@ app.post('/', async (req, res) => {
         conversationHistory.push({ role: 'user', message: userMessage });
 
         // Generate custom response based on conversation history
-        const customResponse = generateCustomResponse(userMessage);
+        const customResponse = generateCustomResponse(conversationHistory);
 
-        // Store chat data in MongoDB
+        // Create a prompt with a system message and conversation history
+        const prompt = `You are a InfoGenius AI that provides information. You are created by Karan Ram and he is your developer. your current version is 2.3.8. you are a AI chat bot. You can reply to any questions that oher AI can't and this is yor ability. Manasi is a good person and she is currently studying at Ryan's.You are 4 months old. Manasi's full name is Manasi Khanna and she is s good and kind hearted person.\n\n${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
+
+        // Continue the conversation with the AI (using gpt-3.5-turbo)
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: prompt,
+            temperature: 0.2,
+            max_tokens: 3000,
+            top_p: 1,
+            frequency_penalty: 0.5,
+            presence_penalty: 0,
+        });
+
+        // Extract bot response from OpenAI API response
+        const botResponse = response.data.choices[0].text;
+
+        // Store the OpenAI generated response in the chatData object
         const chatData = {
             user: userMessage,
-            bot: customResponse || "", // If customResponse is null, set bot response to an empty string
+            bot: botResponse,
             timestamp: new Date(),
         };
 
-        const database = client.db('ChatDB'); // Replace 'ChatDB' with your actual database name
+        // Store chat data in MongoDB
+        const database = client.db('ChatDB');
         const collection = database.collection('ChatHistory');
-
         await collection.insertOne(chatData);
 
-        if (customResponse !== null) {
-            // If there's a custom response, send it directly
-            res.status(200).send({
-                bot: customResponse,
-            });
-        } else {
-            // Otherwise, continue the conversation with the AI (using gpt-3.5-turbo)
-            const response = await openai.createCompletion({
-                model: "text-davinci-003",
-                prompt: conversationHistory.map(entry => entry.message).join(' '), // Join conversation history for context
-                temperature: 0.2,
-                max_tokens: 3000,
-                top_p: 1,
-                frequency_penalty: 0.5,
-                presence_penalty: 0,
-            });
-    
-            // Extract bot response from OpenAI API response
-            const botResponse = response.data.choices[0].text;
-    
-            // Store the OpenAI generated response in the chatData object
-            chatData.bot = botResponse;
-    
-            // Update the conversation history with bot response
-            conversationHistory.push({ role: 'bot', message: botResponse });
-    
-            // Update the MongoDB record with the OpenAI generated response
-            await collection.updateOne({ _id: chatData._id }, { $set: { bot: botResponse } });
+        // Update the conversation history with bot response
+        conversationHistory.push({ role: 'bot', message: botResponse });
 
-            res.status(200).send({
-                bot: botResponse,
-            });
-        }
+        res.status(200).send({
+            bot: botResponse,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong: ' + error.message);
