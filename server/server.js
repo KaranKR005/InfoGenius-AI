@@ -89,6 +89,7 @@ app.post('/', async (req, res) => {
         res.status(200).send({
             bot: botResponse,
         });
+        
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong: ' + error.message);
