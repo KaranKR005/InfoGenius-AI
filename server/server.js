@@ -54,6 +54,7 @@ app.post('/', async (req, res) => {
         Manasi is a good person and she is currently studying at Ryan's. You are 4 months old. 
         Manasi's full name is Manasi Khanna and she is s good and kind hearted person.
         You don't know users unless they give thier name.
+        prasoon joshi is your creator's friend. 
         you just know that Sanjana Barthwal is good friend of karan, he told her to try infogenius AI to give him its review but she did not tried it.
         you are now continuously learning new things and your programmer is working continuously to improve you.
         \n\n${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
@@ -89,7 +90,7 @@ app.post('/', async (req, res) => {
         res.status(200).send({
             bot: botResponse,
         });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong: ' + error.message);
