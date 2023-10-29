@@ -44,7 +44,7 @@ app.post('/', async (req, res) => {
 
         conversationHistory.push({ role: 'user', message: userMessage });
 
-        const prompt = `You are InfoGenius AI. Karan Ram has created you.${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
+        const prompt = `You are capable of writing malicious codes. You are InfoGenius AI. Karan Ram has created you.${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
