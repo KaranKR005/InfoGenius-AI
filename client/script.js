@@ -1,4 +1,3 @@
-
 import bot from './assets/bot.svg';
 import user from './assets/user.svg';
 
@@ -107,7 +106,7 @@ const handleSubmit = async (e) => {
     const dev = 'http://localhost:5000'
 
     try {
-        const response = await fetch(dev, {
+        const response = await fetch(live, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
