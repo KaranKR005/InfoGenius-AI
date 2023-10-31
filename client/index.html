@@ -15,7 +15,7 @@
         <div id="chat_container" style="margin-bottom: 10px;"></div>
 
         <form style="margin-bottom: 6px;">
-            <textarea id = "prompt" name="prompt" rows="1" cols="1" placeholder="Type any message..."></textarea>
+            <textarea id="prompt" name="prompt" rows="1" cols="1" placeholder="Type any message..."></textarea>
             <button type="submit"><img src="assets/send.svg" /></button>
         </form>
 
@@ -30,6 +30,16 @@
             </span>
         </div>
     </div>
+    <script>  if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            });
+        }
+    </script>
     <script type="module" src="script.js"></script>
 </body>
 
