@@ -14,7 +14,7 @@ body {
 #app {
     width: 100vw;
     height: 100vh;
-    background: #330348;
+    background: #5075a7;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,7 +81,7 @@ body {
 
 .ai .profile {
 
-    background: #9d15ac;
+    background: #486476;
 }
 
 .profile img {
@@ -116,7 +116,7 @@ form {
     max-width: 1250px;
     margin: 0 auto;
     padding: 7px;
-    background: #07010b;
+    background: #1d517d;
     border-radius: 10px;
 
     display: flex;
