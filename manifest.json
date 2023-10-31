@@ -1,7 +1,7 @@
 {
     "name": "InfoGenius AI",
     "short_name": "InfoGenius",
-    "start_url": "https://info-genius-ai-karankr005.vercel.app",
+    "start_url": "https://infogeniusai.onrender.com",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
