@@ -1,0 +1,7 @@
+{
+  "name": "InfoGenius_AI",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
