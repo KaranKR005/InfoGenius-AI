@@ -1,8 +1,5 @@
 import bot from './assets/bot.svg';
 import user from './assets/user.svg';
-const express = require('express');
-const app = express();
-app.use(express.static('public')); // 'public' is the directory where your assets are stored
 
 
 const form = document.querySelector('form');
