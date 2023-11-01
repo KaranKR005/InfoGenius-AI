@@ -181,7 +181,7 @@ const handleSubmit = async (e) => {
         }
     } catch (error) {
         clearInterval(loadInterval);
-        messageDiv.innerHTML = 'Disconnected to Database;
+        messageDiv.innerHTML = 'Disconnected to Database';
         console.error(error);
     }
 };
