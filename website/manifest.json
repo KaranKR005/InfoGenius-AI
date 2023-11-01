@@ -1,7 +1,8 @@
 {
     "name": "InfoGenius AI",
     "short_name": "InfoGenius",
-    "start_url": "index.html",
+    "description": "An AI that does everything.",
+    "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
