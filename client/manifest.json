@@ -1,8 +1,8 @@
 {
-    "name": "InfoGen",
+    "name": "InfoGenius AI",
     "short_name": "InfoGenius",
     "description": "An AI that does everything.",
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
@@ -42,7 +42,7 @@
         },
         {
             "src": "https://i.postimg.cc/L8bjwNG7/mobile-screenshot.png",
-            "sizes": "750x1334",
+            "sizes": "450x800",
             "type": "image/png",
             "label": "Mobile screenshot"
         }
