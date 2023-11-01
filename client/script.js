@@ -186,6 +186,9 @@ const handleSubmit = async (e) => {
     }
 };
 document.addEventListener('DOMContentLoaded', function () {
+    const promptInput = document.getElementById('prompt');
+    const sendButton = document.querySelector('form button img');
+
     document.getElementById('prompt').focus();
 
     form.addEventListener('submit', handleSubmit);
@@ -197,5 +200,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
+    // Add an input event listener to the prompt input
+    promptInput.addEventListener('input', function () {
+        // Check if there's any text in the input box
+        if (promptInput.value.trim().length > 0) {
+            // If there's text, set the send button image to send.svg
+            sendButton.src = 'assets/send.svg';
+        } else {
+            // If there's no text, set the send button image to unsend.svg
+            sendButton.src = 'assets/unsend.svg';
+        }
+    });
 });
