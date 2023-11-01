@@ -39,6 +39,14 @@
             "type": "image/png",
             "label": "Wide screenshot",
             "form_factor": "wide"
+        },
+        {
+          "src": "https://i.postimg.cc/L8bjwNG7/mobile-screenshot.png",
+          "sizes": "750x1334",
+          "type": "image/png",
+          "label": "Mobile screenshot",
+          "form_factor": "wide"
+
         }
     ]
 }
