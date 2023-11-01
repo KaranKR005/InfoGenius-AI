@@ -38,6 +38,11 @@ app.get('/', async (req, res) => {
     });
 });
 
+function formatUrls(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+}
+
 app.post('/', async (req, res) => {
     try {
         const userMessage = req.body.prompt;
@@ -59,12 +64,19 @@ app.post('/', async (req, res) => {
             presence_penalty: 0,
         });
 
-        const botResponse = response.data.choices[0].text;
+        // const botResponse = response.data.choices[0].text;
+        // // Process bot response to create hyperlinks for URLs
+        let formattedResponse = response.data.choices[0].text;
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+        // Replace URLs with HTML hyperlinks
+        formattedResponse = formattedResponse.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+
 
         // Store the generated response in the chatData object
         const chatData = {
             user: userMessage,
-            bot: botResponse,
+            bot: formattedResponse,
             timestamp: new Date(),
         };
 
@@ -73,10 +85,10 @@ app.post('/', async (req, res) => {
         const collection = database.collection('ChatHistory');
         await collection.insertOne(chatData);
 
-        conversationHistory.push({ role: 'bot', message: botResponse });
+        conversationHistory.push({ role: 'bot', message: formattedResponse });
 
         res.status(200).send({
-            bot: response.data.choices[0].text,
+            bot: formattedResponse,
         });
 
     } catch (error) {

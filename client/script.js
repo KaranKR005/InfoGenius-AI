@@ -21,22 +21,71 @@ function loader(element) {
     }, 300);
 }
 
-function typeText(element, text) {
-    let index = 0;
 
-    let interval = setInterval(() => {
-        if (index < text.length) {
-            element.innerHTML += text.charAt(index);
-            index++;
-        } else {
-            clearInterval(interval);
+
+function typeText(element, text) {
+    element.innerHTML = ''; // Clear the content before typing
+
+    // Create a temporary element to parse HTML content
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = text;
+
+    // Iterate through child nodes and append them to the message element with typing animation
+    for (let i = 0; i < tempElement.childNodes.length; i++) {
+        const node = tempElement.childNodes[i];
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            // If it's an element node, append a clone of it with typing animation
+            const clonedNode = node.cloneNode(true);
+            clonedNode.style.display = 'none';
+            element.appendChild(clonedNode);
+
+            // Apply typing animation effect
+            setTimeout(() => {
+                clonedNode.style.display = 'inline';
+            }, i * 20); // Adjust the typing speed (20 milliseconds per character)
+        } else if (node.nodeType === Node.TEXT_NODE) {
+            // If it's a text node, create a span element for each character to preserve spaces and apply typing animation
+            for (let j = 0; j < node.nodeValue.length; j++) {
+                const span = document.createElement('span');
+                span.textContent = node.nodeValue[j];
+                span.style.display = 'none';
+                element.appendChild(span);
+
+                // Apply typing animation effect
+                setTimeout(() => {
+                    span.style.display = 'inline';
+                }, (i * node.nodeValue.length + j) * 20); // Adjust the typing speed (20 milliseconds per character)
+            }
         }
-    }, 20);
+    }
 }
 
-// generate unique ID for each message div of bot
-// necessary for typing text effect for that specific reply
-// without unique ID, typing text will work on every element
+
+
+
+// function typeText(element, text) {
+//     element.innerHTML = ''; // Clear the content before typing
+
+//     // Create a temporary element to parse HTML content
+//     const tempElement = document.createElement('div');
+//     tempElement.innerHTML = text;
+
+//     // Iterate through child nodes and append them to the message element
+//     for (let i = 0; i < tempElement.childNodes.length; i++) {
+//         const node = tempElement.childNodes[i];
+//         if (node.nodeType === Node.ELEMENT_NODE) {
+//             // If it's an element node, append a clone of it
+//             element.appendChild(node.cloneNode(true));
+//         } else if (node.nodeType === Node.TEXT_NODE) {
+//             // If it's a text node, create a span element for each character to preserve spaces
+//             const span = document.createElement('span');
+//             span.textContent = node.nodeValue;
+//             element.appendChild(span);
+//         }
+//     }
+// }
+
+
 function generateUniqueId() {
     const timestamp = Date.now();
     const randomNumber = Math.random();
@@ -106,7 +155,7 @@ const handleSubmit = async (e) => {
     const dev = 'http://localhost:5000'
 
     try {
-        const response = await fetch(live, {
+        const response = await fetch(dev, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
