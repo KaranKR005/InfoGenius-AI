@@ -34,13 +34,13 @@
     ],
     "screenshots": [
         {
-            "src": "/desktop-screenshot.png",
+            "src": "https://i.postimg.cc/kGwGWH75/desktop-screenshot.png",
             "sizes": "1280x800",
             "type": "image/png",
             "label": "Desktop screenshot"
         },
         {
-            "src": "/mobile-screenshot.png",
+            "src": "https://i.postimg.cc/N0T0dFQS/mobile-screenshot.jpg",
             "sizes": "750x1334",
             "type": "image/png",
             "label": "Mobile screenshot"
