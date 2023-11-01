@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if there's any text in the input box
         if (promptInput.value.trim().length > 0) {
             // If there's text, set the send button image to send.svg
-            sendButton.src = 'assets/send.svg';
+            sendButton.src = '/assets/send.svg';
         } else {
             // If there's no text, set the send button image to unsend.svg
-            sendButton.src = 'assets/unsend.svg';
+            sendButton.src = '/assets/unsend.svg';
         }
     });
 });
