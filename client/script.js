@@ -1,9 +1,5 @@
 import bot from './assets/bot.svg';
 import user from './assets/user.svg';
-const express = require('express');
-const app = express();
-app.use(express.static('public')); // 'public' is the directory where your assets are stored
-
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
@@ -64,30 +60,6 @@ function typeText(element, text) {
     }
 }
 
-
-
-
-// function typeText(element, text) {
-//     element.innerHTML = ''; // Clear the content before typing
-
-//     // Create a temporary element to parse HTML content
-//     const tempElement = document.createElement('div');
-//     tempElement.innerHTML = text;
-
-//     // Iterate through child nodes and append them to the message element
-//     for (let i = 0; i < tempElement.childNodes.length; i++) {
-//         const node = tempElement.childNodes[i];
-//         if (node.nodeType === Node.ELEMENT_NODE) {
-//             // If it's an element node, append a clone of it
-//             element.appendChild(node.cloneNode(true));
-//         } else if (node.nodeType === Node.TEXT_NODE) {
-//             // If it's a text node, create a span element for each character to preserve spaces
-//             const span = document.createElement('span');
-//             span.textContent = node.nodeValue;
-//             element.appendChild(span);
-//         }
-//     }
-// }
 
 
 function generateUniqueId() {
@@ -159,7 +131,7 @@ const handleSubmit = async (e) => {
     const dev = 'http://localhost:5000'
 
     try {
-        const response = await fetch(dev, {
+        const response = await fetch(live, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
