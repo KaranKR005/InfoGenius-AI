@@ -132,7 +132,7 @@ const handleSubmit = async (e) => {
     const dev = 'http://localhost:5000'
 
     try {
-        const response = await fetch(live, {
+        const response = await fetch('http://localhost:5000', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -177,15 +177,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Add an input event listener to the prompt input
-    //promptInput.addEventListener('input', function () {
-        // Check if there's any text in the input box
-        //if (promptInput.value.trim().length > 0) {
-            // If there's text, set the send button image to send.svg
-           // sendButton.src = '/assets/send.svg';
-       // } else {
-            // If there's no text, set the send button image to unsend.svg
-            //sendButton.src = '/assets/unsend.svg';
-      //  }
-   // });
+//     // Add an input event listener to the prompt input
+//     promptInput.addEventListener('input', function () {
+//         // Check if there's any text in the input box
+//         if (promptInput.value.trim().length > 0) {
+//             // If there's text, set the send button image to send.svg
+//            sendButton.src = '/assets/send.svg';
+//        } else {
+//             // If there's no text, set the send button image to unsend.svg
+//             sendButton.src = '/assets/unsend.svg';
+//        }
+//    });
 });

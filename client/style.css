@@ -108,7 +108,7 @@ body {
 
 /* Style hyperlinks within the chat messages */
 .message a {
-    color: #0078d4; /* Link color */
+    color: #228B22; /* Link color */
     text-decoration: underline; /* Underline the link */
 }
 
