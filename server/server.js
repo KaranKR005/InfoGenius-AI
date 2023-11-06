@@ -78,7 +78,7 @@ app.post('/', async (req, res) => {
         const chatData = {
             user: userMessage,
             bot: formattedResponse,
-            timestamp: istTime,
+            timestamp: `${new Date()}, ${istTime}`,
         };
 
         // Store chat data in MongoDB
