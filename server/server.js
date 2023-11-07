@@ -83,7 +83,7 @@ app.post('/', async (req, res) => {
 
         // Store chat data in MongoDB
         const database = client.db('ChatDB');
-        const collection = database.collection('ChatHistory');
+        const collection = database.collection('MyHistory');
         await collection.insertOne(chatData);
 
         conversationHistory.push({ role: 'bot', message: formattedResponse });
