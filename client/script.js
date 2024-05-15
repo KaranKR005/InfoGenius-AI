@@ -154,7 +154,7 @@ const handleSubmit = async (e) => {
             const errorText = await response.text();
 
             // messageDiv.innerHTML = 'Apologies, there are currently too many users connected. Please wait for a moment.';
-            messageDiv.innerHTML = 'Apologies, the server has been disabled by Karan Ram.';
+            messageDiv.innerHTML = 'Apologies, the server has been disabled by Karan Kumar.';
             alert(errorText);
         }
     } catch (error) {
