@@ -153,7 +153,7 @@ const handleSubmit = async (e) => {
         } else {
             const errorText = await response.text();
 
-            // messageDiv.innerHTML = 'Apologies, there are currently too many users connected. Please wait for a moment.';
+            // messageDiv.innerHTML = 'This AI has been disabled by Karan Kumar. We appreciate your interest and look forward to bringing it back soon.';
             messageDiv.innerHTML = 'Apologies, the server has been disabled by Karan Kumar.';
             alert(errorText);
         }
