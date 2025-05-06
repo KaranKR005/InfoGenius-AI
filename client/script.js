@@ -154,7 +154,7 @@ const handleSubmit = async (e) => {
             const errorText = await response.text();
 
             // messageDiv.innerHTML = 'This AI has been disabled by Karan Kumar. We appreciate your interest and look forward to bringing it back soon.';
-            // messageDiv.innerHTML = 'Apologies, the server has been disabled by Karan Kumar.';
+            messageDiv.innerHTML = 'Apologies, something went wrong';
             alert(errorText);
         }
     } catch (error) {
