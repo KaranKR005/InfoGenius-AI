@@ -132,7 +132,7 @@ const handleSubmit = async (e) => {
     const dev = 'http://localhost:5000'
 
     try {
-        const response = await fetch(live, {
+        const response = await fetch( "https://infogenius-ai.onrender.com", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const handleSubmit = async (e) => {
             const errorText = await response.text();
 
             // messageDiv.innerHTML = 'This AI has been disabled by Karan Kumar. We appreciate your interest and look forward to bringing it back soon.';
-            messageDiv.innerHTML = 'Apologies, something went wrong';
+            messageDiv.innerHTML = 'Apologies, something went wrong.';
             alert(errorText);
         }
     } catch (error) {
