@@ -55,14 +55,14 @@ app.post('/', async (req, res) => {
         you will ask users their name if they say you hello or any other salutation
         ${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
 
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: prompt,
-            temperature: 0.2,
-            max_tokens: 3000,
-            top_p: 1,
-            frequency_penalty: 0.5,
-            presence_penalty: 0,
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // or "gpt-4"
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.2,
+          max_tokens: 3000,
+          top_p: 1,
+          frequency_penalty: 0.5,
+          presence_penalty: 0,
         });
 
         // const botResponse = response.data.choices[0].text;
@@ -71,7 +71,7 @@ app.post('/', async (req, res) => {
         const urlRegex = /(https?:\/\/[^\s]+)/g;
 
         // Replace URLs with HTML hyperlinks
-        formattedResponse = formattedResponse.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+        // formattedResponse = formattedResponse.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
 
 
         // Store the generated response in the chatData object
