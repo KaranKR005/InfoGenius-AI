@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 // import { Configuration, OpenAIApi } from 'openai';
 
-import OpenAI from 'openai';
+import { OpenAI } from 'openai'; // ✅ This works with SDK v4
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
