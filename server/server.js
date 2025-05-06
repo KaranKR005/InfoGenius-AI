@@ -1,7 +1,13 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import { Configuration, OpenAIApi } from 'openai';
+// import { Configuration, OpenAIApi } from 'openai';
+
+import OpenAI from 'openai';
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 import pkg from 'mongodb';
 const { MongoClient } = pkg;
 
@@ -14,7 +20,7 @@ const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
+// const openai = new OpenAIApi(configuration);
 
 const app = express();
 app.use(express.json());
@@ -56,7 +62,7 @@ app.post('/', async (req, res) => {
         ${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
 
         const response = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // or "gpt-4"
+          model: "gpt-3.5-turbo",
           messages: [{ role: "user", content: prompt }],
           temperature: 0.2,
           max_tokens: 3000,
@@ -65,9 +71,10 @@ app.post('/', async (req, res) => {
           presence_penalty: 0,
         });
 
+
         // const botResponse = response.data.choices[0].text;
         // // Process bot response to create hyperlinks for URLs
-        let formattedResponse = response.data.choices[0].text;
+        const formattedResponse = response.choices[0].message.content;
         const urlRegex = /(https?:\/\/[^\s]+)/g;
 
         // Replace URLs with HTML hyperlinks
